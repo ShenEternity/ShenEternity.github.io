@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>个人介绍 | ShenEternity</title>
+    <title>Categories: 个人 | ShenEternity</title>
     <meta name="author" content="ShenEternity" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -37,10 +37,6 @@
 
 
 <script src="/js/lib/preview.js"></script>
-
-
-
-
 
 
 
@@ -154,20 +150,36 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>个人介绍</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/6/24
+            <div id="archives">
+    
+    <div class="categories-tags">
+        
+        
+        
+        <span>
+            <a href="/categories/%E7%BC%96%E7%A8%8B/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                编程
+            </a>
         </span>
         
-        <span class="category">
-            <a href="/categories/%E4%B8%AA%E4%BA%BA/">
+        
+        
+        <span>
+            <a href="/categories/%E5%86%85%E6%A0%B8/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                内核
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/%E4%B8%AA%E4%BA%BA/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -176,36 +188,47 @@
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/%E4%B8%AA%E4%BA%BA/" style="color: #00bcd4">
-                    个人
-                </a>
-            </span>
-            
-        </span>
+        
         
     </div>
     
-    <div class="content" v-pre>
-        <p>你好！我叫ShenEternity(沈永恒)，这是我的<a target="_blank" rel="noopener" href="https://github.com/ShenEternity">Github</a>。</p>
-<h2 id="个人信息"><a href="#个人信息" class="headerlink" title="个人信息"></a>个人信息</h2><p>一个职高学生，喜欢编程，目前在学C++，并其很乐意与他人分享我的学习经验；<br>会编译Android内核；</p>
-<h2 id="在做什么"><a href="#在做什么" class="headerlink" title="在做什么"></a>在做什么</h2><p>目前在使用C++编写一个Android调度；</p>
-<h2 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h2><p>QQ：3258551611</p>
-
+    <div class="timeline">
+        <div class="timeline-tail"></div>
+        <div class="timeline-content">
+            <div class="item-time">2025/6/24</div>
+            <a href="/2025/06/24/ShenEternity/">
+                <h3>个人介绍</h3>
+            </a>
+            <div class="info">
+                
+                <span class="category">
+                    <a href="/categories/%E4%B8%AA%E4%BA%BA/">
+                        <span class="icon">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </span>
+                        个人
+                    </a>
+                </span>
+                
+                
+                <span class="tags">
+                    <span class="icon">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </span>
+                    
+                    
+                    <span class="tag">
+                        
+                        <a href="/tags/%E4%B8%AA%E4%BA%BA/" style="color: #ffa2c4">
+                            个人
+                        </a>
+                    </span>
+                    
+                </span>
+                
+            </div>
+        </div>
     </div>
-    
-    
-    
-    
-    
-    
     
 </div>
 
@@ -237,12 +260,6 @@
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-
-
     
 </body>
 </html>
