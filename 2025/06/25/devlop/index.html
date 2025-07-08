@@ -184,7 +184,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/C/" style="color: #ffa2c4">
+                <a href="/tags/C/" style="color: #ff7d73">
                     C++
                 </a>
             </span>
@@ -194,172 +194,110 @@
     </div>
     
     <div class="content" v-pre>
-        <pre><code class="language-cpp">#ifndef SZENEXT_HPP
+        <pre><code class="language-cpp">
+#ifndef SZENEXT_HPP
 #define SZENEXT_HPP
 
 #include &quot;../tool/readconfig.hpp&quot;
 #include &quot;../tool/mods.hpp&quot;
 #include &quot;utils.hpp&quot;
 #include &quot;unistd.h&quot;
+#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;sys/inotify.h&gt;
+#include &lt;thread&gt;
 using namespace std;
-class SZENEXT &#123;
+class SZENEXT:public Rconfig&#123;
 public:
     string Mods,Mtemp;
     Utils utils;
     Rconfig config;
     MODS mods;
-    const char* COREPATH = &quot;/sys/devices/system/cpu/cpufreq/policy&quot;+to_string(*config)+&quot;7/scaling_max_freq&quot;;
-
-
     int OC;
+    const char * configfile = &quot;/storage/emulated/0/Android/SZE_NEXT/config.txt&quot;;
 
-    void Read()&#123;
-        while (1)
-        &#123;
-            sleep(1);
-            ifstream file = mods.GETC();
-            string modss;
-            while (getline(file,modss))
-            &#123;
-                Mods = move(modss);
+    int fd = inotify_init();
+    int wd = inotify_add_watch(fd, configfile, IN_MODIFY);
+    char buff[1024];
+
+
+    void Readx()&#123;
+        ReadPolicy();
+        while (1) &#123;
+            int len = read(fd, buff, sizeof(buff));
+            for (char * i = buff; i &lt; buff + len;) &#123;
+                auto *eve= reinterpret_cast&lt;inotify_event*&gt;(i);
+                if (eve -&gt; mask &amp; IN_MODIFY) &#123;
+                    ifstream file = mods.GETC();
+                    string modss;
+                    while (getline(file,modss))
+                    &#123;
+                        Mods = std::move(modss);
+                        ReadConfig(Mods);
+                        PDMODS();
+                        if(Mods != Mtemp)&#123;
+                            Mtemp = Mods;
+                            utils.log((&quot;模式已更新: &quot; + Mods).c_str());
+                        &#125;
+                    &#125;
+                &#125;
+                i += sizeof(inotify_event) + eve-&gt;len;  
             &#125;
-            cout &lt;&lt; &quot;READMODS&quot; &lt;&lt; endl;
         &#125;
-        
-        
     &#125;
+
+    void Readv()&#123;
+        while (1) &#123;
+            int len = read(fd, buff, sizeof(buff));
+            for (char * i = buff; i &lt; buff + len;) &#123;
+                auto *eve= reinterpret_cast&lt;inotify_event*&gt;(i);
+                if (eve -&gt; mask &amp; IN_MODIFY) &#123;
+                    ifstream file = mods.GETC();
+                    string modss;
+                    while (getline(file,modss))
+                    &#123;
+                        Mods = std::move(modss);
+                    &#125;
+                &#125;
+                i += sizeof(inotify_event) + eve-&gt;len;  
+            &#125;
+        &#125;
+    &#125;
+
+
+
+    string GETFreqPath(string policy)&#123;
+        return &quot;/sys/devices/system/cpu/cpufreq/policy&quot; + policy + &quot;/scaling_max_freq&quot;;
+    &#125;
+
+    string GETGoverPath(string policy)&#123;
+        return &quot;/sys/devices/system/cpu/cpufreq/policy&quot; + policy + &quot;/scaling_governor&quot;;
+    &#125;
+
+    string GETGovernorPath(string policy, string gover, string path)&#123;
+        return &quot;/sys/devices/system/cpu/cpufreq/policy&quot; + policy + &quot;/&quot; + gover + &quot;/&quot; + path;
+    &#125;
+
 
     void PDMODS()&#123;
-        config.ReadConfig();
-        while (1)
-        &#123;
-            
-            if (Mods == &quot;powersave&quot;)
-            &#123;
-
-                if (OC &gt;= *config.POW_BOOST_OC)
-                &#123;
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq&quot;,*config.POW_BOOST_MINCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq&quot;,*config.POW_BOOST_MIDCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq&quot;,*config.POW_BOOST_BIGCORE);
-                    utils.log((&quot;CPU占用超&quot; + to_string(*config.POW_BOOST_OC) + &quot;  BOOST&quot;).c_str());
-                &#125;
-                else
-                &#123;
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq&quot;,*config.POW_MINCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq&quot;,*config.POW_MIDCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq&quot;,*config.POW_BIGCORE);
-                &#125;
-                
-                if (Mods != Mtemp)
-                &#123;
-                    
-                    utils.log((&quot;INFO:&quot;+Mods+&quot;模式启动&quot;).c_str());
-                    cout &lt;&lt; &quot;pow&quot; &lt;&lt; endl;
-                    Mtemp = Mods;
-                &#125;
-            
-            &#125;
-
-            else if(Mods == &quot;balance&quot;)
-            &#123;
-                if (OC &gt;= *config.BAN_BOOST_OC)
-                &#123;
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq&quot;,*config.BAN_BOOST_MINCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq&quot;,*config.BAN_BOOST_MIDCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq&quot;,*config.BAN_BOOST_BIGCORE);
-                    utils.log((&quot;CPU占用超&quot; + to_string(*config.BAN_BOOST_OC) + &quot;  BOOST&quot;).c_str());
-                &#125;
-                else
-                &#123;
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq&quot;,*config.BAN_MINCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq&quot;,*config.BAN_MIDCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq&quot;,*config.BAN_BIGCORE);
-                &#125;
-                
-
-                if (Mods != Mtemp)
-                &#123;
-                    
-                    cout &lt;&lt; &quot;ban&quot; &lt;&lt; endl;
-                    utils.log((&quot;INFO:&quot;+Mods+&quot;模式启动&quot;).c_str());
-                    Mtemp = Mods;
-                &#125;
-
-            &#125;
-
-            else if (Mods == &quot;performace&quot;)
-            &#123;
-                if (OC &gt;= *config.PER_BOOST_OC)
-                &#123;
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq&quot;,*config.PER_BOOST_MINCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq&quot;,*config.PER_BOOST_MIDCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq&quot;,*config.PER_BOOST_BIGCORE);
-                    utils.log((&quot;CPU占用超&quot; + to_string(*config.PER_BOOST_OC) + &quot;  BOOST&quot;).c_str());
-                &#125;
-                else
-                &#123;
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq&quot;,*config.PER_MINCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq&quot;,*config.PER_MIDCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq&quot;,*config.PER_BIGCORE);
-                &#125;
-
-                if (Mods != Mtemp)
-                &#123;
-                    
-                    cout &lt;&lt; &quot;ban&quot; &lt;&lt; endl;
-                    utils.log((&quot;INFO:&quot;+Mods+&quot;模式启动&quot;).c_str());
-                    Mtemp = Mods;
-                &#125;
-            &#125;
-
-            else if (Mods == &quot;fast&quot;)
-            &#123;
-                if (OC &gt;= *config.FAS_BOOST_OC)
-                &#123;
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq&quot;,*config.FAS_BOOST_MINCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq&quot;,*config.FAS_BOOST_MIDCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq&quot;,*config.FAS_BOOST_BIGCORE);
-                    utils.log((&quot;CPU占用超&quot; + to_string(*config.FAS_BOOST_OC) + &quot;  BOOST&quot;).c_str());
-                &#125;
-                else
-                &#123;
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq&quot;,*config.FAS_MINCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy4/scaling_max_freq&quot;,*config.FAS_MIDCORE);
-                    utils.Writer(&quot;/sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq&quot;,*config.FAS_BIGCORE);
-               &#125;
-            
-                if (Mods != Mtemp)
-                &#123;
-                    
-                    cout &lt;&lt; &quot;ban&quot; &lt;&lt; endl;
-                    utils.log((&quot;INFO:&quot;+Mods+&quot;模式启动&quot;).c_str());
-                    Mtemp = Mods;
-                &#125;
-            &#125;
-            sleep(2);
-        &#125;
+        utils.Writer(GETFreqPath(policy1), FREQ_MINCORE);
+        utils.Writer(GETFreqPath(policy2), FREQ_MIDCORE);
+        utils.Writer(GETFreqPath(policy3), FREQ_BIGCORE);
+        utils.Writer(GETFreqPath(policy4), FREQ_MAXCORE);
+        utils.Writer(GETGoverPath(policy1), GOVER_MINCORE);
+        utils.Writer(GETGoverPath(policy2), GOVER_MIDCORE);
+        utils.Writer(GETGoverPath(policy3), GOVER_BIGCORE);
+        utils.Writer(GETGoverPath(policy4), GOVER_MAXCORE);
     &#125;
 
 
-    void COC ()&#123;
-        while (1)
-        &#123;
-            auto c1 = utils.readCpuStats();
-            sleep(2);
-            auto c2 = utils.readCpuStats();
-            OC = utils.calculateTotalCpuLoad(c1,c2);
-        &#125;
-        
-        
-    &#125;
 
-
-    void iniit()&#123;
-        config.Readname();
-        utils.log((&quot;******调度配置：&quot; + config.name).c_str());
-        utils.log((&quot;******配置版本：&quot; + config.lv).c_str());
-        utils.log((&quot;******配置作者：&quot; + config.Out).c_str());
+    void init()&#123;
+        ReadName();
+        utils.log((&quot;******调度配置：&quot; + name).c_str());
+        utils.log((&quot;******配置版本：&quot; + lv).c_str());
+        utils.log((&quot;******配置作者：&quot; + Out).c_str());
 
 
     &#125;
