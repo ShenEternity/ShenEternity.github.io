@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | ShenEternity</title>
+    <title>Categories: SZE调度 | ShenEternity</title>
     <meta name="author" content="ShenEternity" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -39,8 +39,6 @@
 <script src="/js/lib/preview.js"></script>
 
 
-
-<script src="/js/lib/search.js"></script>
 
 
 
@@ -152,166 +150,97 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            
-<div id="archives">
+            <div id="archives">
     
-    <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch" />
+    <div class="categories-tags">
+        
+        
+        
+        <span>
+            <a href="/categories/%E7%BC%96%E7%A8%8B/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                编程
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/%E5%86%85%E6%A0%B8/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                内核
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/%E4%B8%AA%E4%BA%BA/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                个人
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/SZE%E8%B0%83%E5%BA%A6/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                SZE调度
+            </a>
+        </span>
+        
+        
+        
+        
+    </div>
     
-    <div id="timeline-wrap" ref="timeline">
-        
-        <div class="timeline" data-title="个人介绍">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/6/24</div>
-                <a href="/2025/06/24/ShenEternity/">
-                    <h3>个人介绍</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/%E4%B8%AA%E4%BA%BA/">
-                            <span class="icon">
-                                <i class="fa-solid fa-bookmark fa-fw"></i>
-                            </span>
-                            个人
-                        </a>
-                    </span>
-                    
-                    
-                    <span class="tags">
+    <div class="timeline">
+        <div class="timeline-tail"></div>
+        <div class="timeline-content">
+            <div class="item-time">2025/7/10</div>
+            <a href="/2025/07/10/SZE_config/">
+                <h3>SZE_NEXT3.8Beta的配置写法</h3>
+            </a>
+            <div class="info">
+                
+                <span class="category">
+                    <a href="/categories/SZE%E8%B0%83%E5%BA%A6/">
                         <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
                         </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/%E4%B8%AA%E4%BA%BA/" style="color: #ffa2c4">
-                                个人
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="项目代码展示">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/6/25</div>
-                <a href="/2025/06/25/devlop/">
-                    <h3>项目代码展示</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/%E7%BC%96%E7%A8%8B/">
-                            <span class="icon">
-                                <i class="fa-solid fa-bookmark fa-fw"></i>
-                            </span>
-                            编程
-                        </a>
+                        SZE调度
+                    </a>
+                </span>
+                
+                
+                <span class="tags">
+                    <span class="icon">
+                        <i class="fa-solid fa-tags fa-fw"></i>
                     </span>
                     
                     
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
+                    <span class="tag">
                         
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/C/" style="color: #03a9f4">
-                                C++
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="android内核">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/6/25</div>
-                <a href="/2025/06/25/posts/">
-                    <h3>Android内核</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/%E5%86%85%E6%A0%B8/">
-                            <span class="icon">
-                                <i class="fa-solid fa-bookmark fa-fw"></i>
-                            </span>
-                            内核
-                        </a>
-                    </span>
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/%E5%86%85%E6%A0%B8/" style="color: #00a596">
-                                内核
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="sze_next3.8beta的配置写法">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/7/10</div>
-                <a href="/2025/07/10/SZE_config/">
-                    <h3>SZE_NEXT3.8Beta的配置写法</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/SZE%E8%B0%83%E5%BA%A6/">
-                            <span class="icon">
-                                <i class="fa-solid fa-bookmark fa-fw"></i>
-                            </span>
+                        <a href="/tags/SZE%E8%B0%83%E5%BA%A6/" style="color: #00a596">
                             SZE调度
                         </a>
                     </span>
                     
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/SZE%E8%B0%83%E5%BA%A6/" style="color: #00bcd4">
-                                SZE调度
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
+                </span>
+                
             </div>
         </div>
-        
     </div>
+    
 </div>
 
             <footer id="footer">
