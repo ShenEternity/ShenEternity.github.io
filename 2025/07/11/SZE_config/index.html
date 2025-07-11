@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>SZE_NEXT3.8Beta的配置写法 | ShenEternity</title>
+    <title> | ShenEternity</title>
     <meta name="author" content="ShenEternity" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,48 +156,25 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>SZE_NEXT3.8Beta的配置写法</h1>
+        <h1></h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/7/10
+            2025/7/11
         </span>
         
-        <span class="category">
-            <a href="/categories/SZE%E8%B0%83%E5%BA%A6/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                SZE调度
-            </a>
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/SZE%E8%B0%83%E5%BA%A6/" style="color: #03a9f4">
-                    SZE调度
-                </a>
-            </span>
-            
-        </span>
         
     </div>
     
     <div class="content" v-pre>
-        <h1 id="Synchronized-Zero-Latency-Engine"><a href="#Synchronized-Zero-Latency-Engine" class="headerlink" title="Synchronized-Zero-Latency-Engine"></a>Synchronized-Zero-Latency-Engine</h1><h2 id="SZE-NEXT-3-8Beta的配置写法"><a href="#SZE-NEXT-3-8Beta的配置写法" class="headerlink" title="SZE_NEXT#3.8Beta的配置写法"></a>SZE_NEXT#3.8Beta的配置写法</h2><pre><code class="language-json">&#123;
+        <h1 id="Synchronized-Zero-Latency-Engine"><a href="#Synchronized-Zero-Latency-Engine" class="headerlink" title="Synchronized-Zero-Latency-Engine"></a>Synchronized-Zero-Latency-Engine</h1><p>一个简单的调度</p>
+<h2 id="SZE-NEXT-3-8Beta的配置写法"><a href="#SZE-NEXT-3-8Beta的配置写法" class="headerlink" title="SZE_NEXT#3.8Beta的配置写法"></a>SZE_NEXT#3.8Beta的配置写法</h2><pre><code class="language-json">&#123;&#123;
     &quot;Name&quot;:&#123;
         &quot;name&quot;: &quot;8100_MAX&quot;,
-        &quot;lv&quot;: &quot;3.0Beta&quot;,
+        &quot;lv&quot;: &quot;4.0&quot;,
         &quot;Out&quot;: &quot;ShenEternity&quot;
     &#125;,
 
@@ -249,10 +226,21 @@
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
                 &quot;Config3&quot;:700
             &#125;
+        &#125;,
+        &quot;CPU_UCLAMP&quot;:&#123;
+            &quot;Background_cpu_uclamp_max&quot;:80,
+            &quot;Background_cpu_uclamp_min&quot;:0,
+            &quot;Top_app_cpu_uclamp_max&quot;:80,
+            &quot;Top_app_cpu_uclamp_min&quot;:0,
+            &quot;System-Background_cpu_uclamp_max&quot;:80,
+            &quot;System-Background_cpu_uclamp_min&quot;:0,
+            &quot;System_cpu_uclamp_max&quot;:80,
+            &quot;System_cpu_uclamp_min&quot;:0,
+            &quot;Foreground_cpu_uclamp_max&quot;:80,
+            &quot;Foreground_cpu_uclamp_min&quot;:0
         &#125;
 
     &#125;,
-
 
     &quot;balance&quot;:&#123;
         &quot;FREQ&quot;:&#123;
@@ -290,6 +278,18 @@
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
                 &quot;Config3&quot;:700
             &#125;
+        &#125;,
+        &quot;CPU_UCLAMP&quot;:&#123;
+            &quot;Background_cpu_uclamp_max&quot;:100,
+            &quot;Background_cpu_uclamp_min&quot;:0,
+            &quot;Top_app_cpu_uclamp_max&quot;:100,
+            &quot;Top_app_cpu_uclamp_min&quot;:0,
+            &quot;System-Background_cpu_uclamp_max&quot;:100,
+            &quot;System-Background_cpu_uclamp_min&quot;:0,
+            &quot;System_cpu_uclamp_max&quot;:100,
+            &quot;System_cpu_uclamp_min&quot;:0,
+            &quot;Foreground_cpu_uclamp_max&quot;:100,
+            &quot;Foreground_cpu_uclamp_min&quot;:0
         &#125;
     &#125;,
 
@@ -330,6 +330,18 @@
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
                 &quot;Config3&quot;:700
             &#125;
+        &#125;,
+        &quot;CPU_UCLAMP&quot;:&#123;
+            &quot;Background_cpu_uclamp_max&quot;:100,
+            &quot;Background_cpu_uclamp_min&quot;:0,
+            &quot;Top_app_cpu_uclamp_max&quot;:100,
+            &quot;Top_app_cpu_uclamp_min&quot;:0,
+            &quot;System-Background_cpu_uclamp_max&quot;:100,
+            &quot;System-Background_cpu_uclamp_min&quot;:0,
+            &quot;System_cpu_uclamp_max&quot;:100,
+            &quot;System_cpu_uclamp_min&quot;:0,
+            &quot;Foreground_cpu_uclamp_max&quot;:100,
+            &quot;Foreground_cpu_uclamp_min&quot;:0
         &#125;
     &#125;,
 
@@ -370,6 +382,18 @@
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
                 &quot;Config3&quot;:700
             &#125;
+        &#125;,
+       &quot;CPU_UCLAMP&quot;:&#123;
+            &quot;Background_cpu_uclamp_max&quot;:100,
+            &quot;Background_cpu_uclamp_min&quot;:0,
+            &quot;Top_app_cpu_uclamp_max&quot;:100,
+            &quot;Top_app_cpu_uclamp_min&quot;:0,
+            &quot;System-Background_cpu_uclamp_max&quot;:100,
+            &quot;System-Background_cpu_uclamp_min&quot;:0,
+            &quot;System_cpu_uclamp_max&quot;:100,
+            &quot;System_cpu_uclamp_min&quot;:0,
+            &quot;Foreground_cpu_uclamp_max&quot;:100,
+            &quot;Foreground_cpu_uclamp_min&quot;:0
         &#125;
     &#125;
 &#125;
@@ -440,6 +464,18 @@
             &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
             &quot;Config3&quot;:700
         &#125;
+    &#125;,
+    &quot;CPU_UCLAMP&quot;:&#123;                                      &lt;----  CPU_UCLAMP字段
+        &quot;Background_cpu_uclamp_max&quot;:80,
+        &quot;Background_cpu_uclamp_min&quot;:0,
+        &quot;Top_app_cpu_uclamp_max&quot;:80,
+        &quot;Top_app_cpu_uclamp_min&quot;:0,
+        &quot;System-Background_cpu_uclamp_max&quot;:80,
+        &quot;System-Background_cpu_uclamp_min&quot;:0,           &lt;----  微调  （这个我不知道怎么说，可以问ai）
+        &quot;System_cpu_uclamp_max&quot;:80,
+        &quot;System_cpu_uclamp_min&quot;:0,
+        &quot;Foreground_cpu_uclamp_max&quot;:80,
+        &quot;Foreground_cpu_uclamp_min&quot;:0
     &#125;
 
 &#125;,
