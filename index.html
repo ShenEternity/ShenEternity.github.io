@@ -181,230 +181,19 @@
         
 
 <div class="post">
-    <a href="/2025/06/24/ShenEternity/">
-        <h2 class="post-title">个人介绍</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E4%B8%AA%E4%BA%BA/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                个人
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/6/24
-        </span>
-        
-        
-        <span class="special">
-            <i class="fa-solid fa-grip-vertical fa-fw"></i>
-        </span>
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="人生路漫漫，每个人都有独属于自己的浪漫，多么想让这独属于自己的浪漫，永恒定格！"><a href="#人生路漫漫，每个人都有独属于自己的浪漫，多么想让这独属于自己的浪漫，永恒定格！" class="headerlink" title="人生路漫漫，每个人都有独属于自己的浪漫，多么想让这独属于自己的浪漫，永恒定格！"></a>人生路漫漫，每个人都有独属于自己的浪漫，多么想让这独属于自己的浪漫，永恒定格！</h1><p>你好！我叫ShenEternity(沈永恒)，这是我的<a target="_blank" rel="noopener" href="https://github.com/ShenEternity">Github</a>。</p>
-<h2 id="个人信息"><a href="#个人信息" class="headerlink" title="个人信息"></a>个人信息</h2><p>一个职高学生，喜欢编程，目前在学C++，并其很乐意与他人分享我的学习经验；<br>会编译Android内核；</p>
-<h2 id="在做什么"><a href="#在做什么" class="headerlink" title="在做什么"></a>在做什么</h2><p>目前在使用C++编写一个Android调度；</p>
-<h2 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h2><p>QQ：3258551611</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E4%B8%AA%E4%BA%BA/" style="color: #ff7d73">个人</a>
-        </span>
-        
-    </div>
-    <a href="/2025/06/24/ShenEternity/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/06/25/devlop/">
-        <h2 class="post-title">项目代码展示</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E7%BC%96%E7%A8%8B/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                编程
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/6/25
-        </span>
-        
-        
-        <span class="special">
-            <i class="fa-solid fa-grip-vertical fa-fw"></i>
-        </span>
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <pre><code class="language-cpp">
-#ifndef SZENEXT_HPP
-#define SZENEXT_HPP
-
-#include &quot;../tool/readconfig.hpp&quot;
-#include &quot;../tool/mods.hpp&quot;
-#include &quot;utils.hpp&quot;
-#include &quot;unistd.h&quot;
-#include &lt;fstream&gt;
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;sys/inotify.h&gt;
-#include &lt;thread&gt;
-using namespace std;
-class SZENEXT:public Rconfig&#123;
-public:
-    string Mods,Mtemp;
-    Utils utils;
-    Rconfig config;
-    MODS mods;
-    int OC;
-    const char * configfile = &quot;/storage/emulated/0/Android/SZE_NEXT/config.txt&quot;;
-
-    int fd = inotify_init();
-    int wd = inotify_add_watch(fd, configfile, IN_MODIFY);
-    char buff[1024];
-
-
-    void Readx()&#123;
-        ReadPolicy();
-        while (1) &#123;
-            int len = read(fd, buff, sizeof(buff));
-            for (char * i = buff; i &lt; buff + len;) &#123;
-                auto *eve= reinterpret_cast&lt;inotify_event*&gt;(i);
-                if (eve -&gt; mask &amp; IN_MODIFY) &#123;
-                    ifstream file = mods.GETC();
-                    string modss;
-                    while (getline(file,modss))
-                    &#123;
-                        Mods = std::move(modss);
-                        ReadConfig(Mods);
-                        PDMODS();
-                        if(Mods != Mtemp)&#123;
-                            Mtemp = Mods;
-                            utils.log((&quot;模式已更新: &quot; + Mods).c_str());
-                        &#125;
-                    &#125;
-                &#125;
-                i += sizeof(inotify_event) + eve-&gt;len;  
-            &#125;
-        &#125;
-    &#125;
-
-    void Readv()&#123;
-        while (1) &#123;
-            int len = read(fd, buff, sizeof(buff));
-            for (char * i = buff; i &lt; buff + len;) &#123;
-                auto *eve= reinterpret_cast&lt;inotify_event*&gt;(i);
-                if (eve -&gt; mask &amp; IN_MODIFY) &#123;
-                    ifstream file = mods.GETC();
-                    string modss;
-                    while (getline(file,modss))
-                    &#123;
-                        Mods = std::move(modss);
-                    &#125;
-                &#125;
-                i += sizeof(inotify_event) + eve-&gt;len;  
-            &#125;
-        &#125;
-    &#125;
-
-
-
-    string GETFreqPath(string policy)&#123;
-        return &quot;/sys/devices/system/cpu/cpufreq/policy&quot; + policy + &quot;/scaling_max_freq&quot;;
-    &#125;
-
-    string GETGoverPath(string policy)&#123;
-        return &quot;/sys/devices/system/cpu/cpufreq/policy&quot; + policy + &quot;/scaling_governor&quot;;
-    &#125;
-
-    string GETGovernorPath(string policy, string gover, string path)&#123;
-        return &quot;/sys/devices/system/cpu/cpufreq/policy&quot; + policy + &quot;/&quot; + gover + &quot;/&quot; + path;
-    &#125;
-
-
-    void PDMODS()&#123;
-        utils.Writer(GETFreqPath(policy1), FREQ_MINCORE);
-        utils.Writer(GETFreqPath(policy2), FREQ_MIDCORE);
-        utils.Writer(GETFreqPath(policy3), FREQ_BIGCORE);
-        utils.Writer(GETFreqPath(policy4), FREQ_MAXCORE);
-        utils.Writer(GETGoverPath(policy1), GOVER_MINCORE);
-        utils.Writer(GETGoverPath(policy2), GOVER_MIDCORE);
-        utils.Writer(GETGoverPath(policy3), GOVER_BIGCORE);
-        utils.Writer(GETGoverPath(policy4), GOVER_MAXCORE);
-    &#125;
-
-
-
-    void init()&#123;
-        ReadName();
-        utils.log((&quot;******调度配置：&quot; + name).c_str());
-        utils.log((&quot;******配置版本：&quot; + lv).c_str());
-        utils.log((&quot;******配置作者：&quot; + Out).c_str());
-
-
-    &#125;
-
-&#125;;
-
-#endif
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/C/" style="color: #ffa2c4">C++</a>
-        </span>
-        
-    </div>
-    <a href="/2025/06/25/devlop/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
     <a href="/2025/07/12/SZE_config/">
-        <h2 class="post-title"></h2>
+        <h2 class="post-title">SZE_NEXT3.8Beta的配置写法</h2>
     </a>
     <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/SZE%E8%B0%83%E5%BA%A6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                SZE调度
+            </a>
+        </span>
         
         <span class="date">
             <span class="icon">
@@ -413,6 +202,10 @@ public:
             2025/7/12
         </span>
         
+        
+        <span class="special">
+            <i class="fa-solid fa-grip-vertical fa-fw"></i>
+        </span>
         
     </div>
     <div class="description">
@@ -769,10 +562,239 @@ public:
     </div>
     <div class="post-tags">
         
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
         
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/SZE%E8%B0%83%E5%BA%A6/" style="color: #03a9f4">SZE调度</a>
+        </span>
         
     </div>
     <a href="/2025/07/12/SZE_config/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/06/24/ShenEternity/">
+        <h2 class="post-title">个人介绍</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E4%B8%AA%E4%BA%BA/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                个人
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/24
+        </span>
+        
+        
+        <span class="special">
+            <i class="fa-solid fa-grip-vertical fa-fw"></i>
+        </span>
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="人生路漫漫，每个人都有独属于自己的浪漫，多么想让这独属于自己的浪漫，永恒定格！"><a href="#人生路漫漫，每个人都有独属于自己的浪漫，多么想让这独属于自己的浪漫，永恒定格！" class="headerlink" title="人生路漫漫，每个人都有独属于自己的浪漫，多么想让这独属于自己的浪漫，永恒定格！"></a>人生路漫漫，每个人都有独属于自己的浪漫，多么想让这独属于自己的浪漫，永恒定格！</h1><p>你好！我叫ShenEternity(沈永恒)，这是我的<a target="_blank" rel="noopener" href="https://github.com/ShenEternity">Github</a>。</p>
+<h2 id="个人信息"><a href="#个人信息" class="headerlink" title="个人信息"></a>个人信息</h2><p>一个职高学生，喜欢编程，目前在学C++，并其很乐意与他人分享我的学习经验；<br>会编译Android内核；</p>
+<h2 id="在做什么"><a href="#在做什么" class="headerlink" title="在做什么"></a>在做什么</h2><p>目前在使用C++编写一个Android调度；</p>
+<h2 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h2><p>QQ：3258551611</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E4%B8%AA%E4%BA%BA/" style="color: #ffa2c4">个人</a>
+        </span>
+        
+    </div>
+    <a href="/2025/06/24/ShenEternity/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/06/25/devlop/">
+        <h2 class="post-title">项目代码展示</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%BC%96%E7%A8%8B/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                编程
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/25
+        </span>
+        
+        
+        <span class="special">
+            <i class="fa-solid fa-grip-vertical fa-fw"></i>
+        </span>
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <pre><code class="language-cpp">
+#ifndef SZENEXT_HPP
+#define SZENEXT_HPP
+
+#include &quot;../tool/readconfig.hpp&quot;
+#include &quot;../tool/mods.hpp&quot;
+#include &quot;utils.hpp&quot;
+#include &quot;unistd.h&quot;
+#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;sys/inotify.h&gt;
+#include &lt;thread&gt;
+using namespace std;
+class SZENEXT:public Rconfig&#123;
+public:
+    string Mods,Mtemp;
+    Utils utils;
+    Rconfig config;
+    MODS mods;
+    int OC;
+    const char * configfile = &quot;/storage/emulated/0/Android/SZE_NEXT/config.txt&quot;;
+
+    int fd = inotify_init();
+    int wd = inotify_add_watch(fd, configfile, IN_MODIFY);
+    char buff[1024];
+
+
+    void Readx()&#123;
+        ReadPolicy();
+        while (1) &#123;
+            int len = read(fd, buff, sizeof(buff));
+            for (char * i = buff; i &lt; buff + len;) &#123;
+                auto *eve= reinterpret_cast&lt;inotify_event*&gt;(i);
+                if (eve -&gt; mask &amp; IN_MODIFY) &#123;
+                    ifstream file = mods.GETC();
+                    string modss;
+                    while (getline(file,modss))
+                    &#123;
+                        Mods = std::move(modss);
+                        ReadConfig(Mods);
+                        PDMODS();
+                        if(Mods != Mtemp)&#123;
+                            Mtemp = Mods;
+                            utils.log((&quot;模式已更新: &quot; + Mods).c_str());
+                        &#125;
+                    &#125;
+                &#125;
+                i += sizeof(inotify_event) + eve-&gt;len;  
+            &#125;
+        &#125;
+    &#125;
+
+    void Readv()&#123;
+        while (1) &#123;
+            int len = read(fd, buff, sizeof(buff));
+            for (char * i = buff; i &lt; buff + len;) &#123;
+                auto *eve= reinterpret_cast&lt;inotify_event*&gt;(i);
+                if (eve -&gt; mask &amp; IN_MODIFY) &#123;
+                    ifstream file = mods.GETC();
+                    string modss;
+                    while (getline(file,modss))
+                    &#123;
+                        Mods = std::move(modss);
+                    &#125;
+                &#125;
+                i += sizeof(inotify_event) + eve-&gt;len;  
+            &#125;
+        &#125;
+    &#125;
+
+
+
+    string GETFreqPath(string policy)&#123;
+        return &quot;/sys/devices/system/cpu/cpufreq/policy&quot; + policy + &quot;/scaling_max_freq&quot;;
+    &#125;
+
+    string GETGoverPath(string policy)&#123;
+        return &quot;/sys/devices/system/cpu/cpufreq/policy&quot; + policy + &quot;/scaling_governor&quot;;
+    &#125;
+
+    string GETGovernorPath(string policy, string gover, string path)&#123;
+        return &quot;/sys/devices/system/cpu/cpufreq/policy&quot; + policy + &quot;/&quot; + gover + &quot;/&quot; + path;
+    &#125;
+
+
+    void PDMODS()&#123;
+        utils.Writer(GETFreqPath(policy1), FREQ_MINCORE);
+        utils.Writer(GETFreqPath(policy2), FREQ_MIDCORE);
+        utils.Writer(GETFreqPath(policy3), FREQ_BIGCORE);
+        utils.Writer(GETFreqPath(policy4), FREQ_MAXCORE);
+        utils.Writer(GETGoverPath(policy1), GOVER_MINCORE);
+        utils.Writer(GETGoverPath(policy2), GOVER_MIDCORE);
+        utils.Writer(GETGoverPath(policy3), GOVER_BIGCORE);
+        utils.Writer(GETGoverPath(policy4), GOVER_MAXCORE);
+    &#125;
+
+
+
+    void init()&#123;
+        ReadName();
+        utils.log((&quot;******调度配置：&quot; + name).c_str());
+        utils.log((&quot;******配置版本：&quot; + lv).c_str());
+        utils.log((&quot;******配置作者：&quot; + Out).c_str());
+
+
+    &#125;
+
+&#125;;
+
+#endif
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/C/" style="color: #ffa2c4">C++</a>
+        </span>
+        
+    </div>
+    <a href="/2025/06/25/devlop/" class="go-post">阅读全文</a>
 </div>
 
 
