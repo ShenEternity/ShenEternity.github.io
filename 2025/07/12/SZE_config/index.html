@@ -163,7 +163,7 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/7/11
+            2025/7/12
         </span>
         
         
@@ -171,10 +171,10 @@
     
     <div class="content" v-pre>
         <h1 id="Synchronized-Zero-Latency-Engine"><a href="#Synchronized-Zero-Latency-Engine" class="headerlink" title="Synchronized-Zero-Latency-Engine"></a>Synchronized-Zero-Latency-Engine</h1><p>一个简单的调度</p>
-<h2 id="SZE-NEXT-3-8Beta的配置写法"><a href="#SZE-NEXT-3-8Beta的配置写法" class="headerlink" title="SZE_NEXT#3.8Beta的配置写法"></a>SZE_NEXT#3.8Beta的配置写法</h2><pre><code class="language-json">&#123;&#123;
+<h2 id="SZE-NEXT-4-1的配置写法"><a href="#SZE-NEXT-4-1的配置写法" class="headerlink" title="SZE_NEXT#4.1的配置写法"></a>SZE_NEXT#4.1的配置写法</h2><pre><code class="language-json">&#123;
     &quot;Name&quot;:&#123;
         &quot;name&quot;: &quot;8100_MAX&quot;,
-        &quot;lv&quot;: &quot;4.0&quot;,
+        &quot;lv&quot;: &quot;3.0Beta&quot;,
         &quot;Out&quot;: &quot;ShenEternity&quot;
     &#125;,
 
@@ -238,6 +238,13 @@
             &quot;System_cpu_uclamp_min&quot;:0,
             &quot;Foreground_cpu_uclamp_max&quot;:80,
             &quot;Foreground_cpu_uclamp_min&quot;:0
+        &#125;,
+        &quot;CPUSET&quot;:&#123;
+            &quot;Background&quot;:&quot;0-3&quot;,
+            &quot;Top_app&quot;:&quot;0-7&quot;,
+            &quot;System-Background&quot;:&quot;0-3&quot;,
+            &quot;System&quot;:&quot;0-3&quot;,
+            &quot;Foreground&quot;:&quot;0-6&quot;
         &#125;
 
     &#125;,
@@ -290,6 +297,13 @@
             &quot;System_cpu_uclamp_min&quot;:0,
             &quot;Foreground_cpu_uclamp_max&quot;:100,
             &quot;Foreground_cpu_uclamp_min&quot;:0
+        &#125;,
+        &quot;CPUSET&quot;:&#123;
+            &quot;Background&quot;:&quot;0-3&quot;,
+            &quot;Top_app&quot;:&quot;0-7&quot;,
+            &quot;System-Background&quot;:&quot;0-3&quot;,
+            &quot;System&quot;:&quot;0-3&quot;,
+            &quot;Foreground&quot;:&quot;0-6&quot;
         &#125;
     &#125;,
 
@@ -342,6 +356,13 @@
             &quot;System_cpu_uclamp_min&quot;:0,
             &quot;Foreground_cpu_uclamp_max&quot;:100,
             &quot;Foreground_cpu_uclamp_min&quot;:0
+        &#125;,
+        &quot;CPUSET&quot;:&#123;
+            &quot;Background&quot;:&quot;0-2&quot;,
+            &quot;Top_app&quot;:&quot;0-7&quot;,
+            &quot;System-Background&quot;:&quot;0-3&quot;,
+            &quot;System&quot;:&quot;0-3&quot;,
+            &quot;Foreground&quot;:&quot;0-5&quot;
         &#125;
     &#125;,
 
@@ -394,6 +415,13 @@
             &quot;System_cpu_uclamp_min&quot;:0,
             &quot;Foreground_cpu_uclamp_max&quot;:100,
             &quot;Foreground_cpu_uclamp_min&quot;:0
+        &#125;,
+        &quot;CPUSET&quot;:&#123;
+            &quot;Background&quot;:&quot;0-1&quot;,
+            &quot;Top_app&quot;:&quot;0-7&quot;,
+            &quot;System-Background&quot;:&quot;0-2&quot;,
+            &quot;System&quot;:&quot;0-3&quot;,
+            &quot;Foreground&quot;:&quot;0-5&quot;
         &#125;
     &#125;
 &#125;
@@ -476,6 +504,13 @@
         &quot;System_cpu_uclamp_min&quot;:0,
         &quot;Foreground_cpu_uclamp_max&quot;:80,
         &quot;Foreground_cpu_uclamp_min&quot;:0
+    &#125;,
+    &quot;CPUSET&quot;:&#123;                                          &lt;----  CPUSET字段
+        &quot;Background&quot;:&quot;0-3&quot;,                                 &lt;----  后台使用的cpu核心数
+        &quot;Top_app&quot;:&quot;0-7&quot;,                                    &lt;----  顶层使用的cpu核心数
+        &quot;System-Background&quot;:&quot;0-3&quot;,                          &lt;----  系统后台使用的cpu核心数
+        &quot;System&quot;:&quot;0-3&quot;,                                     &lt;----  系统使用的cpu核心数
+        &quot;Foreground&quot;:&quot;0-6&quot;                                  &lt;----  前台使用的cpu核心数
     &#125;
 
 &#125;,
