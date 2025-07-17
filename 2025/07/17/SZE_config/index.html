@@ -163,7 +163,7 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/7/12
+            2025/7/17
         </span>
         
         <span class="category">
@@ -184,7 +184,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/SZE%E8%B0%83%E5%BA%A6/" style="color: #00a596">
+                <a href="/tags/SZE%E8%B0%83%E5%BA%A6/" style="color: #03a9f4">
                     SZE调度
                 </a>
             </span>
@@ -195,16 +195,17 @@
     
     <div class="content" v-pre>
         <h1 id="Synchronized-Zero-Latency-Engine"><a href="#Synchronized-Zero-Latency-Engine" class="headerlink" title="Synchronized-Zero-Latency-Engine"></a>Synchronized-Zero-Latency-Engine</h1><p>一个简单的调度</p>
-<h2 id="SZE-NEXT-4-1的配置写法"><a href="#SZE-NEXT-4-1的配置写法" class="headerlink" title="SZE_NEXT#4.1的配置写法"></a>SZE_NEXT#4.1的配置写法</h2><pre><code class="language-json">&#123;
+<h2 id="Github-开源地址-https-github-com-ShenEternity-Synchronized-Zero-Latency-Engine"><a href="#Github-开源地址-https-github-com-ShenEternity-Synchronized-Zero-Latency-Engine" class="headerlink" title="Github(开源地址)[https://github.com/ShenEternity/Synchronized-Zero-Latency-Engine]"></a>Github(开源地址)[<a target="_blank" rel="noopener" href="https://github.com/ShenEternity/Synchronized-Zero-Latency-Engine]">https://github.com/ShenEternity/Synchronized-Zero-Latency-Engine]</a></h2><h2 id="SZE-NEXT-4-4的配置写法"><a href="#SZE-NEXT-4-4的配置写法" class="headerlink" title="SZE_NEXT#4.4的配置写法"></a>SZE_NEXT#4.4的配置写法</h2><pre><code class="language-json">&#123;
     &quot;Name&quot;:&#123;
         &quot;name&quot;: &quot;8100_MAX&quot;,
-        &quot;lv&quot;: &quot;3.0Beta&quot;,
+        &quot;lv&quot;: &quot;4.4&quot;,
         &quot;Out&quot;: &quot;ShenEternity&quot;
     &#125;,
 
     &quot;SetConfig&quot;:&#123;
         &quot;SetGover&quot;:true,
-        &quot;SetGoverConfig&quot;:true
+        &quot;SetGoverConfig&quot;:true,
+        &quot;OifaceAndJoyoset&quot;:true
     &#125;,
 
     &quot;Policy&quot;:&#123;
@@ -269,6 +270,9 @@
             &quot;System-Background&quot;:&quot;0-3&quot;,
             &quot;System&quot;:&quot;0-3&quot;,
             &quot;Foreground&quot;:&quot;0-6&quot;
+        &#125;,
+        &quot;EAS&quot;:&#123;
+            &quot;EAS_Enable&quot;:true
         &#125;
 
     &#125;,
@@ -328,7 +332,11 @@
             &quot;System-Background&quot;:&quot;0-3&quot;,
             &quot;System&quot;:&quot;0-3&quot;,
             &quot;Foreground&quot;:&quot;0-6&quot;
+        &#125;,
+        &quot;EAS&quot;:&#123;
+            &quot;EAS_Enable&quot;:true
         &#125;
+
     &#125;,
 
 
@@ -387,7 +395,11 @@
             &quot;System-Background&quot;:&quot;0-3&quot;,
             &quot;System&quot;:&quot;0-3&quot;,
             &quot;Foreground&quot;:&quot;0-5&quot;
+        &#125;,
+        &quot;EAS&quot;:&#123;
+            &quot;EAS_Enable&quot;:true
         &#125;
+
     &#125;,
 
 
@@ -446,6 +458,9 @@
             &quot;System-Background&quot;:&quot;0-2&quot;,
             &quot;System&quot;:&quot;0-3&quot;,
             &quot;Foreground&quot;:&quot;0-5&quot;
+        &#125;,
+        &quot;EAS&quot;:&#123;
+            &quot;EAS_Enable&quot;:true
         &#125;
     &#125;
 &#125;
@@ -459,6 +474,7 @@
 <h3 id="第二块（SetConfig）"><a href="#第二块（SetConfig）" class="headerlink" title="第二块（SetConfig）"></a>第二块（SetConfig）</h3><pre><code>&quot;SetConfig&quot;:&#123;
     &quot;SetGover&quot;:true,       &lt;---- 自定义调速器开关  true为开   false为关
     &quot;SetGoverConfig&quot;:true  &lt;---- 自定义调速器参数开关  true为开   false为关    &lt;----   只能填true或false
+    &quot;OifaceAndJoyoset&quot;:true&lt;---- 屏蔽官调
 &#125;,
 </code></pre>
 <h3 id="第三块（Policy）"><a href="#第三块（Policy）" class="headerlink" title="第三块（Policy）"></a>第三块（Policy）</h3><pre><code>&quot;Policy&quot;:&#123;
@@ -535,6 +551,9 @@
         &quot;System-Background&quot;:&quot;0-3&quot;,                          &lt;----  系统后台使用的cpu核心数
         &quot;System&quot;:&quot;0-3&quot;,                                     &lt;----  系统使用的cpu核心数
         &quot;Foreground&quot;:&quot;0-6&quot;                                  &lt;----  前台使用的cpu核心数
+    &#125;，
+    &quot;EAS&quot;:&#123;                                                 &lt;----  EAS字段
+        &quot;EAS_Enable&quot;:true                                   &lt;----- 开关，打游戏建议关
     &#125;
 
 &#125;,
