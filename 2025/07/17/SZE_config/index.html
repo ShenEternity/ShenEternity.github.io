@@ -184,7 +184,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/SZE%E8%B0%83%E5%BA%A6/" style="color: #00a596">
+                <a href="/tags/SZE%E8%B0%83%E5%BA%A6/" style="color: #ff7d73">
                     SZE调度
                 </a>
             </span>
@@ -195,18 +195,17 @@
     
     <div class="content" v-pre>
         <h1 id="Synchronized-Zero-Latency-Engine"><a href="#Synchronized-Zero-Latency-Engine" class="headerlink" title="Synchronized-Zero-Latency-Engine"></a>Synchronized-Zero-Latency-Engine</h1><p>一个简单的调度</p>
-<h2 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h2><p><a target="_blank" rel="noopener" href="https://github.com/ShenEternity/Synchronized-Zero-Latency-Engine">开源地址</a></p>
-<h2 id="SZE-NEXT-4-4的配置写法"><a href="#SZE-NEXT-4-4的配置写法" class="headerlink" title="SZE_NEXT#4.4的配置写法"></a>SZE_NEXT#4.4的配置写法</h2><pre><code class="language-json">&#123;
+<h2 id="SZE-NEXT-4-5的配置写法"><a href="#SZE-NEXT-4-5的配置写法" class="headerlink" title="SZE_NEXT#4.5的配置写法"></a>SZE_NEXT#4.5的配置写法</h2><pre><code class="language-json">&#123;
     &quot;Name&quot;:&#123;
         &quot;name&quot;: &quot;8100_MAX&quot;,
-        &quot;lv&quot;: &quot;4.4&quot;,
+        &quot;lv&quot;: &quot;4.5&quot;,
         &quot;Out&quot;: &quot;ShenEternity&quot;
     &#125;,
 
     &quot;SetConfig&quot;:&#123;
         &quot;SetGover&quot;:true,
         &quot;SetGoverConfig&quot;:true,
-        &quot;OifaceAndJoyoset&quot;:true
+        &quot;OifaceAndJoyose&quot;:true
     &#125;,
 
     &quot;Policy&quot;:&#123;
@@ -230,39 +229,39 @@
         &quot;GoverConfig&quot;:&#123;
             &quot;MINCORE&quot;:&#123;
                 &quot;Path1&quot;:&quot;up_rate_limit_us&quot;,
-                &quot;Config1&quot;:1000,
+                &quot;Config1&quot;:1800,
                 &quot;Path2&quot;:&quot;target_loads&quot;,
-                &quot;Config2&quot;:95,
+                &quot;Config2&quot;:50,
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
-                &quot;Config3&quot;:700
+                &quot;Config3&quot;:1400
             &#125;,
             &quot;MIDCORE&quot;:&#123;
                 &quot;Path1&quot;:&quot;up_rate_limit_us&quot;,
-                &quot;Config1&quot;:1000,
+                &quot;Config1&quot;:2000,
                 &quot;Path2&quot;:&quot;target_loads&quot;,
-                &quot;Config2&quot;:95,
+                &quot;Config2&quot;:55,
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
-                &quot;Config3&quot;:700
+                &quot;Config3&quot;:1400
             &#125;,
             &quot;BIGCORE&quot;:&#123;
                 &quot;Path1&quot;:&quot;up_rate_limit_us&quot;,
-                &quot;Config1&quot;:1000,
+                &quot;Config1&quot;:2000,
                 &quot;Path2&quot;:&quot;targe_loads&quot;,
-                &quot;Config2&quot;:100,
+                &quot;Config2&quot;:50,
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
-                &quot;Config3&quot;:700
+                &quot;Config3&quot;:1400
             &#125;
         &#125;,
         &quot;CPU_UCLAMP&quot;:&#123;
-            &quot;Background_cpu_uclamp_max&quot;:80,
+            &quot;Background_cpu_uclamp_max&quot;:20,
             &quot;Background_cpu_uclamp_min&quot;:0,
-            &quot;Top_app_cpu_uclamp_max&quot;:80,
+            &quot;Top_app_cpu_uclamp_max&quot;:50,
             &quot;Top_app_cpu_uclamp_min&quot;:0,
-            &quot;System-Background_cpu_uclamp_max&quot;:80,
+            &quot;System-Background_cpu_uclamp_max&quot;:30,
             &quot;System-Background_cpu_uclamp_min&quot;:0,
-            &quot;System_cpu_uclamp_max&quot;:80,
+            &quot;System_cpu_uclamp_max&quot;:40,
             &quot;System_cpu_uclamp_min&quot;:0,
-            &quot;Foreground_cpu_uclamp_max&quot;:80,
+            &quot;Foreground_cpu_uclamp_max&quot;:30,
             &quot;Foreground_cpu_uclamp_min&quot;:0
         &#125;,
         &quot;CPUSET&quot;:&#123;
@@ -274,6 +273,14 @@
         &#125;,
         &quot;EAS&quot;:&#123;
             &quot;EAS_Enable&quot;:true
+        &#125;,
+        &quot;SYS&quot;:&#123;
+            &quot;ConfigPath&quot;:&#123;
+                &quot;path1&quot;:&quot;/sys/devices/system/cpu/cpuidle/current_governor&quot;
+            &#125;,
+            &quot;Config&quot;:&#123;
+                &quot;config1&quot;:&quot;teo&quot;
+            &#125;
         &#125;
 
     &#125;,
@@ -292,39 +299,39 @@
         &quot;GoverConfig&quot;:&#123;
             &quot;MINCORE&quot;:&#123;
                 &quot;Path1&quot;:&quot;up_rate_limit_us&quot;,
-                &quot;Config1&quot;:1000,
+                &quot;Config1&quot;:1500,
                 &quot;Path2&quot;:&quot;target_loads&quot;,
-                &quot;Config2&quot;:95,
+                &quot;Config2&quot;:70,
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
-                &quot;Config3&quot;:700
+                &quot;Config3&quot;:1200
             &#125;,
             &quot;MIDCORE&quot;:&#123;
                 &quot;Path1&quot;:&quot;up_rate_limit_us&quot;,
-                &quot;Config1&quot;:1000,
+                &quot;Config1&quot;:1500,
                 &quot;Path2&quot;:&quot;target_loads&quot;,
-                &quot;Config2&quot;:95,
+                &quot;Config2&quot;:75,
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
-                &quot;Config3&quot;:700
+                &quot;Config3&quot;:1200
             &#125;,
             &quot;BIGCORE&quot;:&#123;
                 &quot;Path1&quot;:&quot;up_rate_limit_us&quot;,
-                &quot;Config1&quot;:1000,
+                &quot;Config1&quot;:1600,
                 &quot;Path2&quot;:&quot;target_loads&quot;,
-                &quot;Config2&quot;:95,
+                &quot;Config2&quot;:75,
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
-                &quot;Config3&quot;:700
+                &quot;Config3&quot;:1200
             &#125;
         &#125;,
         &quot;CPU_UCLAMP&quot;:&#123;
-            &quot;Background_cpu_uclamp_max&quot;:100,
+            &quot;Background_cpu_uclamp_max&quot;:70,
             &quot;Background_cpu_uclamp_min&quot;:0,
-            &quot;Top_app_cpu_uclamp_max&quot;:100,
+            &quot;Top_app_cpu_uclamp_max&quot;:70,
             &quot;Top_app_cpu_uclamp_min&quot;:0,
-            &quot;System-Background_cpu_uclamp_max&quot;:100,
+            &quot;System-Background_cpu_uclamp_max&quot;:70,
             &quot;System-Background_cpu_uclamp_min&quot;:0,
-            &quot;System_cpu_uclamp_max&quot;:100,
+            &quot;System_cpu_uclamp_max&quot;:70,
             &quot;System_cpu_uclamp_min&quot;:0,
-            &quot;Foreground_cpu_uclamp_max&quot;:100,
+            &quot;Foreground_cpu_uclamp_max&quot;:70,
             &quot;Foreground_cpu_uclamp_min&quot;:0
         &#125;,
         &quot;CPUSET&quot;:&#123;
@@ -336,8 +343,15 @@
         &#125;,
         &quot;EAS&quot;:&#123;
             &quot;EAS_Enable&quot;:true
+        &#125;,
+        &quot;SYS&quot;:&#123;
+            &quot;ConfigPath&quot;:&#123;
+                &quot;path1&quot;:&quot;/sys/devices/system/cpu/cpuidle/current_governor&quot;
+            &#125;,
+            &quot;Config&quot;:&#123;
+                &quot;config1&quot;:&quot;teo&quot;
+            &#125;
         &#125;
-
     &#125;,
 
 
@@ -357,37 +371,37 @@
                 &quot;Path1&quot;:&quot;up_rate_limit_us&quot;,
                 &quot;Config1&quot;:1000,
                 &quot;Path2&quot;:&quot;target_loads&quot;,
-                &quot;Config2&quot;:95,
+                &quot;Config2&quot;:75,
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
-                &quot;Config3&quot;:700
+                &quot;Config3&quot;:1100
             &#125;,
             &quot;MIDCORE&quot;:&#123;
                 &quot;Path1&quot;:&quot;up_rate_limit_us&quot;,
                 &quot;Config1&quot;:1000,
                 &quot;Path2&quot;:&quot;target_loads&quot;,
-                &quot;Config2&quot;:95,
+                &quot;Config2&quot;:70,
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
-                &quot;Config3&quot;:700
+                &quot;Config3&quot;:1100
             &#125;,
             &quot;BIGCORE&quot;:&#123;
                 &quot;Path1&quot;:&quot;up_rate_limit_us&quot;,
                 &quot;Config1&quot;:1000,
                 &quot;Path2&quot;:&quot;target_loads&quot;,
-                &quot;Config2&quot;:95,
+                &quot;Config2&quot;:70,
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
-                &quot;Config3&quot;:700
+                &quot;Config3&quot;:1100
             &#125;
         &#125;,
         &quot;CPU_UCLAMP&quot;:&#123;
-            &quot;Background_cpu_uclamp_max&quot;:100,
+            &quot;Background_cpu_uclamp_max&quot;:50,
             &quot;Background_cpu_uclamp_min&quot;:0,
             &quot;Top_app_cpu_uclamp_max&quot;:100,
             &quot;Top_app_cpu_uclamp_min&quot;:0,
-            &quot;System-Background_cpu_uclamp_max&quot;:100,
+            &quot;System-Background_cpu_uclamp_max&quot;:60,
             &quot;System-Background_cpu_uclamp_min&quot;:0,
-            &quot;System_cpu_uclamp_max&quot;:100,
+            &quot;System_cpu_uclamp_max&quot;:70,
             &quot;System_cpu_uclamp_min&quot;:0,
-            &quot;Foreground_cpu_uclamp_max&quot;:100,
+            &quot;Foreground_cpu_uclamp_max&quot;:80,
             &quot;Foreground_cpu_uclamp_min&quot;:0
         &#125;,
         &quot;CPUSET&quot;:&#123;
@@ -398,9 +412,16 @@
             &quot;Foreground&quot;:&quot;0-5&quot;
         &#125;,
         &quot;EAS&quot;:&#123;
-            &quot;EAS_Enable&quot;:true
+            &quot;EAS_Enable&quot;:false
+        &#125;,
+        &quot;SYS&quot;:&#123;
+            &quot;ConfigPath&quot;:&#123;
+                &quot;path1&quot;:&quot;/sys/devices/system/cpu/cpuidle/current_governor&quot;
+            &#125;,
+            &quot;Config&quot;:&#123;
+                &quot;config1&quot;:&quot;teo&quot;
+            &#125;
         &#125;
-
     &#125;,
 
 
@@ -418,39 +439,39 @@
         &quot;GoverConfig&quot;:&#123;
             &quot;MINCORE&quot;:&#123;
                 &quot;Path1&quot;:&quot;up_rate_limit_us&quot;,
-                &quot;Config1&quot;:1000,
+                &quot;Config1&quot;:1100,
                 &quot;Path2&quot;:&quot;target_loads&quot;,
-                &quot;Config2&quot;:95,
+                &quot;Config2&quot;:80,
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
-                &quot;Config3&quot;:700
+                &quot;Config3&quot;:1200
             &#125;,
             &quot;MIDCORE&quot;:&#123;
                 &quot;Path1&quot;:&quot;&quot;,
-                &quot;Config1&quot;:1000,
+                &quot;Config1&quot;:1100,
                 &quot;Path2&quot;:&quot;target_loads&quot;,
-                &quot;Config2&quot;:95,
+                &quot;Config2&quot;:75,
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
-                &quot;Config3&quot;:700
+                &quot;Config3&quot;:1200
             &#125;,
             &quot;BIGCORE&quot;:&#123;
                 &quot;Path1&quot;:&quot;up_rate_limit_us&quot;,
-                &quot;Config1&quot;:1000,
+                &quot;Config1&quot;:1100,
                 &quot;Path2&quot;:&quot;target_loads&quot;,
-                &quot;Config2&quot;:95,
+                &quot;Config2&quot;:80,
                 &quot;Path3&quot;:&quot;down_rate_limit_us&quot;,
-                &quot;Config3&quot;:700
+                &quot;Config3&quot;:1000
             &#125;
         &#125;,
        &quot;CPU_UCLAMP&quot;:&#123;
-            &quot;Background_cpu_uclamp_max&quot;:100,
+            &quot;Background_cpu_uclamp_max&quot;:40,
             &quot;Background_cpu_uclamp_min&quot;:0,
             &quot;Top_app_cpu_uclamp_max&quot;:100,
             &quot;Top_app_cpu_uclamp_min&quot;:0,
-            &quot;System-Background_cpu_uclamp_max&quot;:100,
+            &quot;System-Background_cpu_uclamp_max&quot;:50,
             &quot;System-Background_cpu_uclamp_min&quot;:0,
-            &quot;System_cpu_uclamp_max&quot;:100,
+            &quot;System_cpu_uclamp_max&quot;:60,
             &quot;System_cpu_uclamp_min&quot;:0,
-            &quot;Foreground_cpu_uclamp_max&quot;:100,
+            &quot;Foreground_cpu_uclamp_max&quot;:70,
             &quot;Foreground_cpu_uclamp_min&quot;:0
         &#125;,
         &quot;CPUSET&quot;:&#123;
@@ -461,7 +482,15 @@
             &quot;Foreground&quot;:&quot;0-5&quot;
         &#125;,
         &quot;EAS&quot;:&#123;
-            &quot;EAS_Enable&quot;:true
+            &quot;EAS_Enable&quot;:false
+        &#125;,
+        &quot;SYS&quot;:&#123;
+            &quot;ConfigPath&quot;:&#123;
+                &quot;path1&quot;:&quot;/sys/devices/system/cpu/cpuidle/current_governor&quot;
+            &#125;,
+            &quot;Config&quot;:&#123;
+                &quot;config1&quot;:&quot;teo&quot;
+            &#125;
         &#125;
     &#125;
 &#125;
@@ -555,6 +584,14 @@
     &#125;，
     &quot;EAS&quot;:&#123;                                                 &lt;----  EAS字段
         &quot;EAS_Enable&quot;:true                                   &lt;----- 开关，打游戏建议关
+    &#125;,
+    &quot;SYS&quot;:&#123;                                                                     &lt;---- SYS字段 （说是sys，但是只要 selinux允许，想改哪里都行）
+        &quot;ConfigPath&quot;:&#123;
+            &quot;path1&quot;:&quot;/sys/devices/system/cpu/cpuidle/current_governor&quot;          &lt;---- 想要修改的文件路径
+        &#125;,
+        &quot;Config&quot;:&#123;
+            &quot;config1&quot;:&quot;teo&quot;                                                     &lt;---- 想改的值（string类型，支持字符串，说白了 ，啥都能改）
+        &#125;
     &#125;
 
 &#125;,
